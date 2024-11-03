@@ -129,16 +129,17 @@ void printActivePatch() {
 
 void printFootSwitchPatches() {
   byte xCursor = (width_text_size_base * 2 * 2) + 6;
+  byte yCursor = (display.height() / 2) + 10;
 
   display.setTextSize(2);
 
-  display.setCursor(0, (display.height() / 2) + 10);
+  display.setCursor(0, yCursor);
   display.print(getPatchName(valorFS1));
 
-  display.setCursor(xCursor, (display.height() / 2) + 10);
+  display.setCursor(xCursor, yCursor);
   display.print(getPatchName(valorFS2));
 
-  display.setCursor(xCursor * 2, (display.height() / 2) + 10);
+  display.setCursor(xCursor * 2, yCursor);
   display.print(getPatchName(valorFS3));
 }
 
@@ -146,16 +147,12 @@ String getPatchName(byte patch) {
   byte bankNumber = patch / 10;
   byte number = patch % 10;
 
-  return String(getPatchLetter(bankNumber)) + String(number);
+  return BANKS[bankNumber] + String(number);
 }
 
 void drawMidLine() {
   byte y = display.height() / 2;
   display.drawLine(0, y, display.width(), y, BLACK);
-}
-
-char getPatchLetter(byte number) {
-  return BANKS[number];
 }
 
 void increasePatch() {
